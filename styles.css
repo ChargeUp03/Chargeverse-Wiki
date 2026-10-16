@@ -1,0 +1,510 @@
+/* --- CSS Variables & Theme setup --- */
+:root {
+    /* Fonts: Clean system sans-serif fallback */
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    
+    /* Default Light Theme (Mario Red Stripe) */
+    --bg-color-1: #E52521; /* Mario Red */
+    --bg-color-2: #cc1b18; /* Slightly darker red for stripe */
+    --text-color: #ffffff;
+    --hero-text: #ffffff;
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    --panel-text: #333333;
+    --btn-bg: #eeeeee; /* Darkened slightly from original white */
+    --btn-hover: #fafafa;
+    --btn-border: #cccccc;
+    --icon-color: #ffffff;
+    --link-color: #0645ad;
+    --title-bg: #cc1b18;
+    --title-text: #ffffff;
+    --soft-bg: #f4f4f4;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme (Black & Dark Grey Stripe) */
+    --bg-color-1: #0a0a0a; /* Black */
+    --bg-color-2: #1a1a1a; /* Dark Grey */
+    --text-color: #e0e0e0;
+    --hero-text: #e0e0e0;
+    --panel-bg: rgba(30, 30, 30, 0.95);
+    --panel-text: #e0e0e0;
+    --btn-bg: #2a2a2a;
+    --btn-hover: #3a3a3a;
+    --btn-border: #444444;
+    --icon-color: #e0e0e0;
+    --link-color: #7db3ff;
+    --title-bg: #1a1a1a;
+    --title-text: #e0e0e0;
+    --soft-bg: #262626;
+}
+
+/* --- Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-color);
+    min-height: 100vh;
+    /* Diagonal Striped Background: Angle set to 45deg creates \ stripes, sizes reverted */
+    background: repeating-linear-gradient(
+        45deg,
+        var(--bg-color-1),
+        var(--bg-color-1) 20px,
+        var(--bg-color-2) 20px,
+        var(--bg-color-2) 40px
+    );
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* --- Top Bar & Controls --- */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo-placeholder {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--hero-text);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--icon-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Expandable Search --- */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2px;
+    transition: all 0.3s ease;
+    width: 36px; /* Initially only wide enough for the button */
+    overflow: hidden;
+}
+
+.search-container.expanded {
+    width: 250px;
+    background: var(--panel-bg);
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--panel-text);
+    padding: 0;
+    width: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-family: var(--font-main);
+}
+
+.search-container.expanded .search-input {
+    width: 100%;
+    padding: 0 10px 0 15px;
+    opacity: 1;
+}
+
+.search-container.expanded .icon-btn {
+    color: var(--panel-text);
+}
+
+.search-container.expanded .icon-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* --- Main Layout --- */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.hero {
+    margin-bottom: 3rem;
+    color: var(--hero-text);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* --- Navigation Button Grid --- */
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 wide on mobile */
+    gap: 1.5rem; 
+    padding: 1rem 0; 
+}
+
+.nav-button {
+    display: block;
+    text-decoration: none;
+    color: var(--panel-text);
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    padding: 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+    transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-button:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Desktop layout: 2 wide */
+@media (min-width: 600px) {
+    .button-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Story Text Styling */
+.story {
+    text-align: left;
+    
+    white-space: pre-line;
+
+    font-family: var(--font-main);
+    color: var(--panel-text);
+
+    font-size: 1.05rem;
+    line-height: 1.75;
+
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+/* --- Notice Banner --- */
+.notice {
+    max-width: 900px;
+    margin: 1rem auto 0;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+
+    font-family: var(--font-main);
+    color: var(--panel-text);
+    background: var(--panel-bg);
+    border: 1px solid var(--btn-border);
+    border-left: 6px solid #E52521; /* Mario Red accent, visible in both themes */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.notice h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+}
+
+.notice p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Keep it from touching the screen edges on narrow screens */
+@media (max-width: 960px) {
+    .notice {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+
+/* ==========================================================
+   WIKI LAYOUT (added for the homepage / article template)
+   Floats + percentages on purpose, so older browsers cope.
+   ========================================================== */
+
+/* Toolbar: right aligned */
+.top-bar.wiki-bar {
+    justify-content: flex-end;
+}
+
+.search-container form,
+.search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.search-container .icon-btn {
+    flex: none;
+}
+
+.search-container.expanded .icon-btn {
+    color: var(--panel-text);
+}
+
+/* Theme toggle icons: moon in light mode, sun in dark mode */
+.icon-sun { display: none; }
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+.icon-btn svg {
+    display: block;
+    fill: currentColor;
+}
+
+/* Page wrapper */
+.wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
+}
+
+.cols {
+    margin: 0 -6px;
+}
+
+.cols:after,
+.intro:after,
+.tile-grid:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.col-full { padding: 6px; }
+.col-main { float: left; width: 66.666%; }
+.col-side { float: left; width: 33.333%; padding: 6px; }
+.col-half { float: left; width: 50%; padding: 6px; }
+
+/* Wiki-style panels */
+.panel {
+    background: var(--panel-bg);
+    color: var(--panel-text);
+    border: 1px solid var(--btn-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    text-align: left;
+    overflow: hidden;
+}
+
+.panel a {
+    color: var(--link-color);
+}
+
+.panel-title {
+    background: var(--title-bg);
+    color: var(--title-text);
+    font-size: 1.05rem;
+    font-weight: bold;
+    padding: 0.5rem 0.9rem;
+    margin: 0;
+}
+
+.panel-body {
+    padding: 0.9rem 1rem;
+    line-height: 1.6;
+}
+
+/* Intro box with logo spot */
+.intro-logo {
+    float: left;
+    width: 140px;
+    height: 140px;
+    margin: 0 1rem 0.5rem 0;
+    border: 2px dashed var(--btn-border);
+    background: var(--soft-bg);
+    text-align: center;
+    line-height: 140px;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.intro-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.intro h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+}
+
+.intro p {
+    margin-bottom: 0.5rem;
+}
+
+/* Square buttons */
+.tile {
+    float: left;
+    width: 25%;
+    padding: 6px;
+}
+
+.tile-link {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    text-decoration: none;
+    color: var(--panel-text);
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.tile-link:hover {
+    background: var(--btn-hover);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.tile-img {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 50px;
+    border: 2px dashed var(--btn-border);
+    background: var(--soft-bg);
+    text-align: center;
+    overflow: hidden;
+}
+
+.tile-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.tile-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    padding: 0 6px;
+    display: table;
+    width: 100%;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.tile-label span {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* Did you know */
+.facts-list {
+    margin: 0 0 0.8rem 1.1rem;
+}
+
+.facts-list li {
+    margin-bottom: 0.7rem;
+}
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--panel-text);
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+}
+
+.btn:hover {
+    background: var(--btn-hover);
+}
+
+/* News boxes: grow with their content, never clip */
+.news-body {
+    min-height: 170px;
+}
+
+.news-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.news-list li {
+    padding: 0.4rem 0;
+    border-bottom: 1px dotted var(--btn-border);
+}
+
+.news-list li:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    font-weight: bold;
+    margin-right: 0.4rem;
+}
+
+/* Footer */
+.site-footer {
+    margin-top: 6px;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.site-footer p { margin-bottom: 0.3rem; }
+
+/* Small screens */
+@media (max-width: 800px) {
+    .col-main,
+    .col-side { float: none; width: 100%; }
+    .col-main { padding: 0; }
+}
+
+@media (max-width: 560px) {
+    .tile { width: 50%; }
+    .col-half { float: none; width: 100%; }
+    .intro-logo { float: none; margin: 0 auto 0.8rem; }
+    .wrap { padding: 0 0.5rem 1.5rem; }
+}

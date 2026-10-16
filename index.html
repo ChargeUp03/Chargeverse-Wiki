@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chargeverse Wiki - Home</title>
+
     <link rel="apple-touch-icon" href="site_assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="site_assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="site_assets/favicon-16x16.png">
@@ -9,17 +13,151 @@
     <meta name="theme-color" content="#cc1b18" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
     <link rel="manifest" href="site_assets/site.webmanifest">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chargeverse Wiki - Home</title>
+
     <link rel="stylesheet" href="styles.css">
-<title>Chargeverse Wiki</title>
+    <script src="script.js"></script>
 </head>
 <body>
 
-<p>Work in progress!</p>
-<p>The Chargeverse wiki is in its early stages of being set up.</p>
-<p>Why don't you go read some of the <a href="https://archiveofourown.org/series/6360486">stories</a> and check back later?</p>
-  
+    <div class="top-bar wiki-bar">
+        <div class="controls">
+            <div class="search-container" id="search-box">
+                <form class="search-form" id="search-form" action="search.html" method="get">
+                    <input class="search-input" id="search-input" type="text" name="q" placeholder="Search the wiki" aria-label="Search the wiki" autocomplete="off">
+                    <button class="icon-btn" id="search-btn" type="button" aria-label="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    </button>
+                </form>
+            </div>
+            <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+                <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.3 3a9 9 0 1 0 8.7 11.6A7 7 0 0 1 12.3 3z"/></svg>
+                <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM11 1h2v3h-2zM11 20h2v3h-2zM1 11h3v2H1zM20 11h3v2h-3zM4.2 5.6l1.4-1.4 2.1 2.1-1.4 1.4zM16.3 17.7l1.4-1.4 2.1 2.1-1.4 1.4zM4.2 18.4l2.1-2.1 1.4 1.4-2.1 2.1zM16.3 6.3l2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="wrap">
+
+        <div class="cols">
+            <div class="col-full">
+                <div class="panel intro">
+                    <div class="panel-body">
+                        <img src="site_assets/The Chargeverse Logo.png" alt="Chargeverse logo">
+                        <h1>Chargeverse Wiki</h1>
+                        <p>Welcome to the Chargeverse Wiki, a wiki for the Chargeverse and neighboring universes.</p>
+                        <p>This wiki is a work in progress and is incomplete. Check back later for updates!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cols">
+            <div class="col-main">
+                <div class="tile-grid">
+                    <div class="tile">
+                        <a class="tile-link" href="index.html">
+                            <img src="site_assets/characters/mario.png" alt="Mario">
+                            <span class="tile-label"><span>Characters</span></span>
+                        </a>
+                    </div>
+                    <div class="tile">
+                        <a class="tile-link" href="index.html">
+                            <img src="site_assets/homepage/.png" alt="Locations">
+                            <span class="tile-label"><span>Locations</span></span>
+                        </a>
+                    </div>
+                    <div class="tile">
+                        <a class="tile-link" href="index.html">
+                            <img src="site_assets/homepage/.png" alt="Objects">
+                            <span class="tile-label"><span>Objects</span></span>
+                        </a>
+                    </div>
+                    <div class="tile">
+                        <a class="tile-link" href="index.html">
+                            <img src="site_assets/homepage/.png" alt="Stories">
+                            <span class="tile-label"><span>Stories</span></span>
+                        </a>
+                    </div>
+                    <div class="tile">
+                        <a class="tile-link" href="index.html">
+                            <img src="site_assets/homepage/.png" alt="Universes">
+                            <span class="tile-label"><span>Universes</span></span>
+                        </a>
+                    </div>
+                    <div class="tile">
+                        <a class="tile-link" href="index.html">
+                            <img src="site_assets/homepage/.png" alt="AO3">
+                            <span class="tile-label"><span>AO3</span></span>
+                        </a>
+                    </div>
+                    <div class="tile">
+                        <a class="tile-link" href="index.html" title="The old Chargeverse site">
+                            <img src="site_assets/homepage/.png" alt="chargeverse">
+                            <span class="tile-label"><span>Chargeverse</span></span>
+                        </a>
+                    </div>
+                    <div class="tile">
+                        <a class="tile-link" href="index.html">
+                            <img src="site_assets/homepage/.png" alt="GitHub">
+                            <span class="tile-label"><span>GitHub</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-side">
+                <div class="panel">
+                    <h2 class="panel-title">Did you know...</h2>
+                    <div class="panel-body">
+                        <ul class="facts-list" id="facts-list">
+                            <li>Loading facts...</li>
+                        </ul>
+                        <noscript><p>JavaScript seems to be off, or your device doesn't support it. Turn on JavaScript to see random facts if your device supports it.</p></noscript>
+                        <button class="btn" id="facts-refresh" type="button">Show more facts</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News -->
+        <div class="cols">
+            <div class="col-half">
+                <div class="panel">
+                    <h2 class="panel-title">Mario series news</h2>
+                    <div class="panel-body news-body">
+                        <ul class="news-list">
+                            <li><span class="news-date">Oct 15, 2026:</span> The soundtrack for Wario Land: Super Mario Land 3 was added to Nintendo music.</li>
+                            <li><span class="news-date">Oct 5, 2026:</span> Hello, Luigi and Hello, Peach were released for the Switch and Switch 2. Hello, Mario and Hello, Yoshi were also updated.</li>
+                            <li><span class="news-date">September 30, 2026</span> Mario Kart Tour has offically ended its service.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-half">
+                <div class="panel">
+                    <h2 class="panel-title">Chargeverse news</h2>
+                    <div class="panel-body news-body">
+                        <ul class="news-list">
+                            <li><span class="news-date">Oct 15, 2026:</span> The wiki has been updated.</li>
+                            <li><span class="news-date">Oct 11, 2026:</span> The wiki has been created.</li>
+                            <li><span class="news-date">Oct 4, 2026:</span> The old Chargeverse site's EOL has been announced.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="cols">
+            <div class="col-full">
+                <div class="panel site-footer">
+                    <p><a href="https://archiveofourown.org/users/ChargeUp03/works">Read the stories on AO3</a> &middot; <a href="https://github.com/ChargeUp03/Chargeverse-Wiki">GitHub</a></p>
+                    <p>The characters, locations, and objects featured in these stories are the property of Nintendo and Microsoft/Mojang. Original characters and storylines are © Charge, 2024-2026.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 </html>
