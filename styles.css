@@ -105,7 +105,7 @@ body {
     border-radius: 20px;
     padding: 2px;
     transition: all 0.3s ease;
-    width: 36px; /* Initially only wide enough for the button */
+    width: 40px; 
     overflow: hidden;
 }
 
@@ -277,9 +277,9 @@ body {
 }
 
 /* Theme toggle icons: moon in light mode, sun in dark mode */
-.icon-sun { display: none; }
-[data-theme="dark"] .icon-sun { display: block; }
-[data-theme="dark"] .icon-moon { display: none; }
+.icon-btn .icon-sun { display: none; }
+[data-theme="dark"] .icon-btn .icon-sun { display: block; }
+[data-theme="dark"] .icon-btn .icon-moon { display: none; }
 
 .icon-btn svg {
     display: block;
@@ -524,10 +524,13 @@ html {
 
 .tile-link > img {
     position: absolute;
-    top: 4%;
-    left: 4%;
-    width: 92%;
-    height: 58%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 78%;                    
+    height: calc(100% - 50px);      
+    padding: 8%;
     object-fit: contain;
     image-rendering: pixelated;
 }
