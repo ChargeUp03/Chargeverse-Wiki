@@ -508,3 +508,26 @@ body {
     .intro-logo { float: none; margin: 0 auto 0.8rem; }
     .wrap { padding: 0 0.5rem 1.5rem; }
 }
+
+.tile-img img {
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+html {
+    background-color: var(--bg-color-1);
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+.tile-link > img {
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    width: 92%;
+    height: 58%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
