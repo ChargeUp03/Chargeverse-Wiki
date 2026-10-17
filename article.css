@@ -412,3 +412,11 @@ figure {
         height: 110px;
     }
 }
+
+.inline-icon {
+    height: 1.2em;
+    width: auto;
+    vertical-align: -0.25em;
+    margin-right: 0.3em;
+    image-rendering: pixelated;
+}
