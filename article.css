@@ -85,6 +85,20 @@
     margin-bottom: 0.2rem;
 }
 
+/* A <p> inside a list item shouldn't add paragraph spacing */
+.article-content li > p {
+    margin: 0;
+}
+
+/* Small icon in front of a linked name (put the <img> inside the <a>) */
+.inline-icon {
+    height: 1.2em;
+    width: auto;
+    vertical-align: -0.25em;
+    margin-right: 0.3em;
+    image-rendering: pixelated;
+}
+
 .hatnote {
     font-style: italic;
     font-size: 0.92rem;
@@ -411,12 +425,4 @@ figure {
     .gallery-box img {
         height: 110px;
     }
-}
-
-.inline-icon {
-    height: 1.2em;
-    width: auto;
-    vertical-align: -0.25em;
-    margin-right: 0.3em;
-    image-rendering: pixelated;
 }
