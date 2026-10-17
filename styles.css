@@ -97,46 +97,36 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* --- Expandable Search --- */
+/* --- Search (always open) --- */
 .search-container {
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.2);
+    width: 250px;
+    max-width: 58vw;
+    background: var(--panel-bg);
     border-radius: 20px;
     padding: 2px;
-    transition: all 0.3s ease;
-    width: 40px; 
     overflow: hidden;
 }
 
-.search-container.expanded {
-    width: 250px;
-    background: var(--panel-bg);
-}
-
 .search-input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
     background: transparent;
     border: none;
     outline: none;
     color: var(--panel-text);
-    padding: 0;
-    width: 0;
-    opacity: 0;
-    transition: all 0.3s ease;
     font-family: var(--font-main);
-}
-
-.search-container.expanded .search-input {
-    width: 100%;
+    font-size: 16px; /* 16px stops iPhones zooming in on focus */
     padding: 0 10px 0 15px;
-    opacity: 1;
 }
 
-.search-container.expanded .icon-btn {
+.search-container .icon-btn {
     color: var(--panel-text);
 }
 
-.search-container.expanded .icon-btn:hover {
+.search-container .icon-btn:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 
@@ -272,10 +262,6 @@ body {
     flex: none;
 }
 
-.search-container.expanded .icon-btn {
-    color: var(--panel-text);
-}
-
 /* Theme toggle icons: moon in light mode, sun in dark mode */
 .icon-btn .icon-sun { display: none; }
 [data-theme="dark"] .icon-btn .icon-sun { display: block; }
@@ -371,7 +357,7 @@ body {
 /* Square buttons */
 .tile {
     float: left;
-    width: 25%;
+    width: 20%;
     padding: 6px;
 }
 
@@ -503,7 +489,6 @@ body {
 }
 
 @media (max-width: 560px) {
-    .tile { width: 50%; }
     .col-half { float: none; width: 100%; }
     .intro-logo { float: none; margin: 0 auto 0.8rem; }
     .wrap { padding: 0 0.5rem 1.5rem; }
@@ -533,4 +518,29 @@ html {
     padding: 8%;
     object-fit: contain;
     image-rendering: pixelated;
+}
+
+/* Logo beside the intro text */
+.intro-logo-img {
+    float: left;
+    width: 250px;
+    max-width: 40%;
+    height: auto;
+    margin: 0 1.5rem 0.5rem 0;
+}
+
+@media (max-width: 560px) {
+    .intro-logo-img {
+        float: none;
+        display: block;
+        max-width: 100%;
+        margin: 0 auto 1rem;
+    }
+}
+
+/* Phones: 3 buttons across, smaller labels */
+@media (max-width: 640px) {
+    .tile { width: 33.333%; padding: 4px; }
+    .tile-label { height: 36px; font-size: 0.8rem; }
+    .tile-link > img { height: calc(100% - 36px); }
 }

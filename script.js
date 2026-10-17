@@ -1,5 +1,8 @@
 var THEME_KEY = 'chargeverse-theme';
 
+/* On phones, article sections start collapsed. Set to false to start open. */
+var COLLAPSE_BY_DEFAULT = true;
+
 /* ---------- Theme (runs immediately, no flash) ---------- */
 function getSavedTheme() {
     var t = null;
@@ -30,8 +33,30 @@ function onReady(fn) {
     }
 }
 
+function onLoad(fn) {
+    if (window.addEventListener) {
+        window.addEventListener('load', fn, false);
+    } else if (window.attachEvent) {
+        window.attachEvent('onload', fn);
+    }
+}
+
 function trim(s) {
     return s.replace(/^\s+|\s+$/g, '');
+}
+
+function hasClass(el, c) {
+    return (' ' + el.className + ' ').indexOf(' ' + c + ' ') !== -1;
+}
+
+function addClass(el, c) {
+    if (!hasClass(el, c)) {
+        el.className = (el.className ? el.className + ' ' : '') + c;
+    }
+}
+
+function removeClass(el, c) {
+    el.className = trim((' ' + el.className + ' ').replace(' ' + c + ' ', ' '));
 }
 
 /* ---------- Theme toggle button ---------- */
@@ -47,43 +72,32 @@ function setupThemeToggle() {
     };
 }
 
-/* ---------- Expandable search ---------- */
+/* ---------- Search (always visible) ---------- */
+/* Typing + Enter or tapping the magnifier submits to search.html?q=...
+   Tapping the magnifier with an empty box just focuses the box. */
 function setupSearch() {
-    var box = document.getElementById('search-box');
     var btn = document.getElementById('search-btn');
     var input = document.getElementById('search-input');
     var form = document.getElementById('search-form');
-    if (!box || !btn || !input || !form) { return; }
-
-    function expand() {
-        box.className = 'search-container expanded';
-        input.focus();
-    }
-    function collapse() {
-        box.className = 'search-container';
-        input.blur();
-    }
+    if (!btn || !input || !form) { return; }
 
     btn.onclick = function () {
-        var expanded = box.className.indexOf('expanded') !== -1;
-        if (!expanded) {
-            expand();
-        } else if (trim(input.value) !== '') {
+        if (trim(input.value) !== '') {
             form.submit();
         } else {
-            collapse();
+            input.focus();
         }
         return false;
     };
 
-    input.onkeydown = function (e) {
-        e = e || window.event;
-        if (e.keyCode === 27) { collapse(); }
+    form.onsubmit = function () {
+        return trim(input.value) !== '';
     };
 }
 
-/* ---------- Did you know... ---------- */
-/* Reads facts.txt */
+/* ---------- Did you know... (homepage) ---------- */
+/* Reads facts.txt (one fact per line; blank lines and lines starting
+   with # are ignored). Shows 3 random facts. */
 function setupFacts() {
     var list = document.getElementById('facts-list');
     var btn = document.getElementById('facts-refresh');
@@ -106,7 +120,7 @@ function setupFacts() {
         list.innerHTML = '';
         for (var i = 0; i < chosen.length; i++) {
             var li = document.createElement('li');
-            li.innerHTML = chosen[i]; /* facts may contain links, e.g. <a href="...">  */
+            li.innerHTML = chosen[i]; /* facts may contain links */
             list.appendChild(li);
         }
     }
@@ -119,7 +133,6 @@ function setupFacts() {
     }
 
     var xhr = new XMLHttpRequest();
-    /* the timestamp stops browsers showing an old cached copy */
     xhr.open('GET', 'facts.txt?_=' + new Date().getTime(), true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) { return; }
@@ -150,8 +163,194 @@ function setupFacts() {
     }
 }
 
+/* ---------- Article: table of contents ---------- */
+/* Built from the h2/h3 headings inside #article-content. Hidden on phones
+   by CSS. Headings without an id get one. */
+function slugify(t) {
+    var s = t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return s === '' ? 'section' : s;
+}
+
+function setupToc() {
+    var content = document.getElementById('article-content');
+    var toc = document.getElementById('toc');
+    var list = document.getElementById('toc-list');
+    var layout = document.getElementById('article-layout');
+    if (!content || !toc || !list || !layout) { return; }
+    if (!content.querySelectorAll) { return; }
+
+    var heads = content.querySelectorAll('h2, h3');
+    if (heads.length < 2) { return; } /* too short to need one */
+
+    var used = {};
+    var lastLi = null;
+    var sub = null;
+
+    for (var i = 0; i < heads.length; i++) {
+        var h = heads[i];
+        var text = trim(h.textContent || h.innerText || '');
+
+        if (!h.id) {
+            var base = slugify(text);
+            var id = base;
+            var n = 2;
+            while (used[id] || document.getElementById(id)) {
+                id = base + '-' + n;
+                n++;
+            }
+            h.id = id;
+        }
+        used[h.id] = true;
+
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.appendChild(document.createTextNode(text));
+        li.appendChild(a);
+
+        if (h.tagName.toLowerCase() === 'h2' || !lastLi) {
+            list.appendChild(li);
+            lastLi = li;
+            sub = null;
+        } else {
+            if (!sub) {
+                sub = document.createElement('ul');
+                lastLi.appendChild(sub);
+            }
+            sub.appendChild(li);
+        }
+    }
+
+    toc.style.display = 'block';
+    addClass(layout, 'has-toc');
+}
+
+/* ---------- Article: collapsible sections (phones) ---------- */
+/* Every h2 in #article-content controls everything up to the next h2.
+   The CSS only hides collapsed sections on narrow screens, so desktops
+   always show everything. */
+function setCollapsed(head, body, collapsed) {
+    if (collapsed) {
+        addClass(head, 'collapsed');
+        addClass(body, 'collapsed');
+    } else {
+        removeClass(head, 'collapsed');
+        removeClass(body, 'collapsed');
+    }
+    head.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+}
+
+function makeCollapsible(head, body) {
+    head._body = head._body || body;
+    body._head = head;
+    addClass(head, 'collapsible');
+    head.setAttribute('role', 'button');
+    head.setAttribute('tabindex', '0');
+    setCollapsed(head, body, COLLAPSE_BY_DEFAULT);
+
+    head.onclick = function () {
+        setCollapsed(head, body, !hasClass(head, 'collapsed'));
+    };
+    head.onkeydown = function (e) {
+        e = e || window.event;
+        if (e.keyCode === 13 || e.keyCode === 32) {
+            setCollapsed(head, body, !hasClass(head, 'collapsed'));
+            if (e.preventDefault) { e.preventDefault(); }
+            return false;
+        }
+    };
+}
+
+function setupCollapsibles() {
+    var content = document.getElementById('article-content');
+    if (!content) { return; }
+
+    var nodes = [];
+    var i;
+    for (i = 0; i < content.childNodes.length; i++) {
+        nodes.push(content.childNodes[i]);
+    }
+
+    var head = null;
+    var body = null;
+    var pairs = [];
+
+    for (i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        if (node.nodeType === 1 && node.tagName.toLowerCase() === 'h2') {
+            head = node;
+            body = document.createElement('div');
+            body.className = 'section-body';
+            content.insertBefore(body, head.nextSibling);
+            pairs.push([head, body]);
+        } else if (head) {
+            body.appendChild(node);
+        }
+    }
+
+    for (i = 0; i < pairs.length; i++) {
+        makeCollapsible(pairs[i][0], pairs[i][1]);
+    }
+}
+
+/* If the page was opened at #some-heading, open the section it is in. */
+function revealHash() {
+    if (!window.location.hash) { return; }
+    var id = window.location.hash.substring(1);
+    try { id = decodeURIComponent(id); } catch (e) {}
+    var target = document.getElementById(id);
+    if (!target) { return; }
+
+    if (target._body) { setCollapsed(target, target._body, false); }
+    var node = target.parentNode;
+    while (node && node !== document.body) {
+        if (node._head) { setCollapsed(node._head, node, false); }
+        node = node.parentNode;
+    }
+    if (target.scrollIntoView) { target.scrollIntoView(); }
+}
+
+/* ---------- Infobox: Expand / Collapse for long lists ---------- */
+function setupExpandables() {
+    if (!document.querySelectorAll) { return; }
+    var boxes = document.querySelectorAll('.expandable');
+
+    for (var i = 0; i < boxes.length; i++) {
+        initExpandable(boxes[i]);
+    }
+}
+
+function initExpandable(box) {
+    var content = box.querySelector('.expandable-content');
+    var btn = box.querySelector('.expand-btn');
+    if (!content || !btn) { return; }
+
+    function check() {
+        if (hasClass(box, 'expanded')) { return; }
+        btn.style.display = (content.scrollHeight > content.clientHeight + 2) ? 'inline-block' : 'none';
+    }
+
+    btn.onclick = function () {
+        if (hasClass(box, 'expanded')) {
+            removeClass(box, 'expanded');
+            btn.innerHTML = 'Expand';
+        } else {
+            addClass(box, 'expanded');
+            btn.innerHTML = 'Collapse';
+        }
+        return false;
+    };
+
+    check();
+    onLoad(check); /* re-check once images have loaded */
+}
+
 onReady(function () {
     setupThemeToggle();
     setupSearch();
     setupFacts();
+    setupToc();
+    setupCollapsibles();
+    setupExpandables();
+    revealHash();
 });
