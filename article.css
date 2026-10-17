@@ -28,9 +28,15 @@
 
 /* ---------- The grey overlay the article sits on ---------- */
 .article-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1.5rem 1.5rem;
+    max-width: none;
+    margin: 0;
+    padding: 0 1rem 1.5rem;
+}
+
+/* Line the toolbar up with the box edges */
+.top-bar.article-bar {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .article-box {
@@ -218,10 +224,14 @@
     line-height: 1.5;
 }
 
-.banner-wip        { border-left-color: #e6a100; }
-.banner-stub       { border-left-color: #3b82c4; }
-.banner-needs-art  { border-left-color: #8e5bc4; }
-.banner-incomplete { border-left-color: #d9534f; }
+.banner-title {
+    display: block;
+}
+
+.banner-wip      { border-left-color: #e6a100; }
+.banner-missing  { border-left-color: #d9534f; }
+.banner-noimage  { border-left-color: #8e5bc4; }
+.banner-outdated { border-left-color: #3b82c4; }
 
 /* Smaller version for the top of a section */
 .banner-small {
@@ -349,6 +359,11 @@ figure {
 @media (max-width: 600px) {
     .article-wrap {
         padding: 0 0.5rem 1rem;
+    }
+
+    .top-bar.article-bar {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
     .article-box {
