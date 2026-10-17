@@ -222,6 +222,27 @@
     display: block;
 }
 
+/* Icon to the left of both the title and the description.
+   The text block sits beside the floated icon. Banners without an icon still work. */
+.banner-icon {
+    float: left;
+    width: 48px;
+    height: 48px;
+    margin: 0 0.8rem 0 0;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.banner-small .banner-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 0.6rem;
+}
+
+.banner-text {
+    overflow: hidden;
+}
+
 .banner-wip      { border-left-color: #e6a100; }
 .banner-missing  { border-left-color: #d9534f; }
 .banner-noimage  { border-left-color: #8e5bc4; }
