@@ -621,3 +621,17 @@ html {
 .site-footer .back-to-top:hover {
     background: var(--btn-hover);
 }
+
+/* ---------- Missing pages (red links) ---------- */
+:root {
+    --missing-link-color: #ba0000;
+}
+
+[data-theme="dark"] {
+    --missing-link-color: #ff7a7a;
+}
+
+.panel a.missing,
+.article-box a.missing {
+    color: var(--missing-link-color);
+}

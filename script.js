@@ -463,9 +463,37 @@ function setupBackToTop() {
     }
 
     link.onclick = function () {
-        window.scrollTo(0, 0);
+        scrollToTop();
         return false; /* keeps "#top" out of the address bar */
     };
+}
+
+/* Smooth scroll to the top. Uses the browser's own smooth scrolling where it
+   exists, a small animation on older browsers, and no animation at all if the
+   visitor's device asks for reduced motion. */
+function scrollToTop() {
+    var reduce = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+        window.scrollTo(0, 0);
+        return;
+    }
+    if ('scrollBehavior' in document.documentElement.style) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        return;
+    }
+
+    var start = window.pageYOffset || document.documentElement.scrollTop || 0;
+    if (start <= 0) { return; }
+    var steps = 24;
+    var i = 0;
+    var timer = window.setInterval(function () {
+        i++;
+        var t = i / steps;
+        var eased = 1 - (1 - t) * (1 - t); /* starts fast, slows near the top */
+        window.scrollTo(0, Math.round(start * (1 - eased)));
+        if (i >= steps) { window.clearInterval(timer); }
+    }, 16);
 }
 
 onReady(function () {
