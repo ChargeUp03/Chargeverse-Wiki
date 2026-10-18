@@ -346,6 +346,65 @@ figure {
     image-rendering: pixelated;
 }
 
+/* ---------- Infobox icon row ---------- */
+.infobox-icon {
+    display: block;
+    height: 48px;
+    width: auto;
+    image-rendering: pixelated;
+}
+
+/* ---------- Search results ---------- */
+.search-result-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-result {
+    padding: 0.6rem 0;
+    border-bottom: 1px dotted var(--overlay-line);
+    overflow: hidden;
+}
+
+.search-result:last-child {
+    border-bottom: none;
+}
+
+.result-icon {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin: 0 0.8rem 0 0;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.result-body {
+    overflow: hidden;
+}
+
+.result-title {
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+.result-tag {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0 0.4rem;
+    border: 1px solid var(--overlay-line);
+    border-radius: 3px;
+    background: var(--soft-bg);
+    font-size: 0.75rem;
+    vertical-align: middle;
+}
+
+.result-desc {
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
 /* ---------- 404 ---------- */
 .notfound {
     text-align: center;

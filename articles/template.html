@@ -37,6 +37,10 @@
                     </button>
                 </form>
             </div>
+            <button class="icon-btn" id="spoiler-toggle" type="button" aria-label="Spoiler mode" title="Spoiler mode">
+                <svg class="icon-eye" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                <svg class="icon-eye-off" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+            </button>
             <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
                 <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.3 3a9 9 0 1 0 8.7 11.6A7 7 0 0 1 12.3 3z"/></svg>
                 <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM11 1h2v3h-2zM11 20h2v3h-2zM1 11h3v2H1zM20 11h3v2h-3zM4.2 5.6l1.4-1.4 2.1 2.1-1.4 1.4zM16.3 17.7l1.4-1.4 2.1 2.1-1.4 1.4zM4.2 18.4l2.1-2.1 1.4 1.4-2.1 2.1zM16.3 6.3l2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>
@@ -49,6 +53,13 @@
 
             <h1 class="article-title">Character Name</h1>
 
+            <div class="banner banner-wip"><img class="banner-icon" src="../../sprites/banner/mario_builder.png" alt=""><div class="banner-text"><strong class="banner-title">This article is a WIP.</strong>Information in this article may be subject to change.</div></div>
+
+            <div class="banner banner-missing"><img class="banner-icon" src="../../sprites/banner/item_box.png" alt=""><div class="banner-text"><strong class="banner-title">This article is missing information.</strong>Some details about this subject are missing due to lost media or lore not explaining it.</div></div>
+
+            <div class="banner banner-noimage"><img class="banner-icon" src="../../sprites/banner/stamp.png" alt=""><div class="banner-text"><strong class="banner-title">This article does not have image(s).</strong>An appropriate image has not been created yet/is not available for the subject.</div></div>
+
+            <div class="banner banner-outdated"><img class="banner-icon" src="../../sprites/banner/mario_dead.png" alt=""><div class="banner-text"><strong class="banner-title">This article may be outdated.</strong>Information in this article no longer correctly reflects the current lore; it will be updated at a later date.</div></div>
 
             <div class="article-layout" id="article-layout">
 
@@ -63,7 +74,6 @@
                     <p>opening paragraph summarizes the page.</p>
                     <p>2nd paragraph</p>
 
-
                     <!-- CHARACTER INFOBOX. For locations/objects use the versions in snippets.txt. -->
                     <table class="infobox">
                         <tr><th colspan="2" class="infobox-title">Name</th></tr>
@@ -76,6 +86,7 @@
                         <tr><th>Full name</th><td>Full Name</td></tr>
                         <tr><th>Alias</th><td>Alias</td></tr>
                         <tr><th>Birthday</th><td>Janurary 1, YYYY (0 as of 2026)</td></tr>
+                        <tr><th>Icon</th><td><img class="infobox-icon" src="../../sprites/characters/char.png" alt="alt"></td></tr>
                         <tr><th>Birthplace</th><td><a href="#">Location</a></td></tr>
                         <tr><th>Height</th><td>0&prime;0&Prime;</td></tr>
                         <tr><th>Gender</th><td>Gender</td></tr>
@@ -104,12 +115,20 @@
                     </table>
 
                     <h2>Appearance</h2>
-                    <p>Paragrah</p>
+                    <p>Spoiler test: <span class="spoiler">text here</span></p>
 
                     <h2>Personality</h2>
                     <p>Paragrah</p>
 
                     <h2>History</h2>
+                    <div class="banner banner-wip banner-small"><img class="banner-icon" src="../../sprites/banner/super_hammer.png" alt=""><div class="banner-text"><strong class="banner-title">This section is a WIP.</strong>More information will be added or modified at a later date.</div></div>
+                    
+                    <div class="banner banner-missing banner-small"><img class="banner-icon" src="../../sprites/banner/item_box.png" alt=""><div class="banner-text"><strong class="banner-title">This section is missing information.</strong>Some details about this subject are missing due to lost media or lore not explaining it.</div></div>
+                    
+                    <div class="banner banner-noimage banner-small"><img class="banner-icon" src="../../sprites/banner/stamp.png" alt=""><div class="banner-text"><strong class="banner-title">This section does not have image(s).</strong>An appropriate image has not been created yet/is not available for the subject.</div></div>
+                    
+                    <div class="banner banner-outdated banner-small"><img class="banner-icon" src="../../sprites/banner/mario_dead.png" alt=""><div class="banner-text"><strong class="banner-title">This section may be outdated.</strong>Information in this section no longer correctly reflects the current lore; it will be updated at a later date.</div></div>
+                   
                     <p>Paragrah</p>
 
                     <h3>A subsection</h3>
@@ -157,6 +176,7 @@
         <div class="cols">
             <div class="col-full">
                 <div class="panel site-footer">
+                    <p><a class="back-to-top" href="#top">&uarr; Back to top</a></p>
                     <p><a href="https://archiveofourown.org/users/ChargeUp03/works">Read the stories on AO3</a> &middot; <a href="https://github.com/ChargeUp03/Chargeverse-Wiki">GitHub</a></p>
                     <p>The characters, locations, and objects featured in these stories are the property of Nintendo and Microsoft/Mojang. Original characters and storylines are &copy; Charge, 2024-2026.</p>
                 </div>

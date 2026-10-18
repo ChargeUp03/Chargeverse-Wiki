@@ -579,3 +579,45 @@ html {
     .controls { gap: 0.5rem; }
     .site-logo img { height: 28px; }
 }
+
+/* ---------- Spoiler mode ---------- */
+.icon-btn .icon-eye-off { display: none; }
+[data-spoilers="on"] .icon-btn .icon-eye-off { display: block; }
+[data-spoilers="on"] .icon-btn .icon-eye { display: none; }
+
+[data-spoilers="on"] .spoiler {
+    background-color: currentColor;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+[data-spoilers="on"] .spoiler:not(.revealed) * {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+[data-spoilers="on"] .spoiler:not(.revealed) img {
+    visibility: hidden;
+}
+
+[data-spoilers="on"] .spoiler.revealed {
+    background-color: transparent;
+    cursor: auto;
+}
+
+/* Back to top, in the footer box */
+.site-footer .back-to-top {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    padding: 0.3rem 0.9rem;
+    border: 1px solid var(--btn-border);
+    border-radius: 6px;
+    background: var(--btn-bg);
+    color: var(--panel-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.site-footer .back-to-top:hover {
+    background: var(--btn-hover);
+}
